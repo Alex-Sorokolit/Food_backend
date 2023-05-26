@@ -35,7 +35,7 @@ const userSchema = new Schema(
     cart: [
       {
         type: Schema.Types.ObjectId,
-        ref: "dishes",
+        ref: "dish",
       },
     ],
   },

@@ -9,7 +9,7 @@ class CartController {
     if (!dishId) {
       return res.status(422).json({
         code: 422,
-        message: "Missing dish ID in request body",
+        message: "Missing dishID in request body",
       });
     }
 
@@ -45,7 +45,7 @@ class CartController {
       model: "dish",
     });
 
-    const result = user.favorites;
+    const result = user.cart;
 
     if (!result) {
       res.json({
@@ -72,7 +72,7 @@ class CartController {
     ).populate("cart");
     if (!dishId) {
       res.json({
-        message: "Cart is empty",
+        message: "Dish not found",
       });
     }
     res.status(200).json({

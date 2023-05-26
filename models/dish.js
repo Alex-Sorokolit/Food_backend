@@ -15,6 +15,10 @@ const dishSchema = Schema(
       type: String,
       require: [true, "DB: description is required"],
     },
+    price: {
+      type: Number,
+      require: [true, "DB: price is required"],
+    },
 
     thumb: {
       type: String,
@@ -38,6 +42,10 @@ const dishJoiSchema = Joi.object({
   description: Joi.string().required().messages({
     "any.required": "Joi: Description is required",
     "string.empty": "Joi: Description cannot be empty",
+  }),
+  price: Joi.number().required().messages({
+    "any.required": "Joi: Price is required",
+    "string.empty": "Joi: Price cannot be empty",
   }),
 }).options({ abortEarly: false, stripUnknown: true });
 
