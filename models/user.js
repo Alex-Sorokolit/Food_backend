@@ -32,6 +32,12 @@ const userSchema = new Schema(
     imageId: {
       type: String,
     },
+    cart: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "dishes",
+      },
+    ],
   },
   { versionKey: false, timestamps: true }
 );
@@ -78,10 +84,17 @@ const updateUserSchema = Joi.object({
   password: Joi.string().min(6),
 });
 
+const updateCartSchema = Joi.object({
+  cart: Joi.object({
+    dish: Joi.object(),
+  }),
+});
+
 const schemas = {
   registerSchema,
   loginSchema,
   updateUserSchema,
+  updateCartSchema,
 };
 
 const User = model("user", userSchema); //перший аргумент це назва колекції в однині, другий аргумент це схема

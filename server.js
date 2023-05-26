@@ -2,9 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const connectDb = require("./config/db");
 const logger = require("morgan");
-const { authRouter, shopRouter, dishRouter } = require("./routes");
-// var multer = require("multer");
-// var upload = multer();
+const { authRouter, shopRouter, dishRouter, cartRouter } = require("./routes");
 require("colors");
 require("dotenv").config();
 
@@ -15,8 +13,6 @@ const app = express();
 app.use(logger("dev"));
 // for parsing application/xwww-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
-// for parsing multipart/form-data
-// app.use(upload.array());
 // for parsing application/json
 app.use(express.json());
 
@@ -27,6 +23,7 @@ app.use(cors());
 app.use("/api/v1", authRouter);
 app.use("/api/v1", shopRouter);
 app.use("/api/v1", dishRouter);
+app.use("/api/v1", cartRouter);
 
 // Catch Errors ______________________________
 // обробка помилки 404
