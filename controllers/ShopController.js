@@ -36,7 +36,7 @@ class ShopController {
 
     if (!categoryId) {
       res.status(400);
-      throw new Error("Controller: categoryId is required");
+      throw new Error("Controller: shopId is required");
     }
 
     // знайти магазин по id і перевірити чи належить він користувачу
@@ -48,13 +48,13 @@ class ShopController {
     // перевірка чи видалився документ із бази даних
     if (!result) {
       res.status(400);
-      throw new Error("Controller: Category not found");
+      throw new Error("Controller: Shop not found");
     }
 
     res.status(200).json({
       status: "success",
       code: 200,
-      message: "CategoryRecipe deleted",
+      message: "Shop deleted",
       data: result,
     });
   }
@@ -68,13 +68,13 @@ class ShopController {
     // Перевірка чи знайдено документи в базі даних
     if (!result) {
       res.status(400);
-      throw new Error("Controller: Categories not found");
+      throw new Error("Controller: Shop not found");
     }
 
     res.json({
       status: "success",
       code: 200,
-      message: "Own Categories",
+      message: "Own Shops",
       data: result,
       quantity: result.length,
     });

@@ -13,12 +13,12 @@ shopRouter.post("/shops", authenticate, asyncHandler(addShop));
 
 // ❌ Видалити категорію
 shopRouter.delete(
-  "/categories/:id",
+  "/shops/:id",
   authenticate,
   isValidId,
   asyncHandler(removeShop)
 );
 
 // ⏹️ Отримати список всіх категорій
-shopRouter.get("/categories", authenticate, asyncHandler(getAllShops));
+shopRouter.get("/shops", authenticate, asyncHandler(getAllShops));
 module.exports = shopRouter;

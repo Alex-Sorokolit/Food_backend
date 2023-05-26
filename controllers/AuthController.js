@@ -10,25 +10,6 @@ const { HttpError } = require("../helpers");
 const { SECRET_KEY } = process.env;
 
 class AuthController {
-  // ✅ Google Registration
-  async googleAuth(req, res) {
-    const { _id: id } = req.user;
-
-    const payload = {
-      id,
-    };
-
-    const token = jwt.sign(payload, SECRET_KEY, {
-      expiresIn: "23h",
-    });
-
-    await User.findByIdAndUpdate(id, { token });
-
-    res.redirect(
-      `https://romaniv2511.github.io/so-yummy/welcome?token=${token}`
-    );
-  }
-
   // ✅ Registration by Email
   async register(req, res) {
     const { email, password } = req.body;

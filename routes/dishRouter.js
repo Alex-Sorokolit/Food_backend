@@ -1,15 +1,39 @@
 const express = require("express");
 const asyncHandler = require("express-async-handler");
-const { authenticate, isValidId } = require("../middlewares");
+const { schemas } = require("../models/dish");
+const {
+  validateBody,
+  authenticate,
+  isValidId,
+  uploadCloud,
+} = require("../middlewares");
 const {
   dishCtrl: { addDish, removeDish, updateDish, getAllDishes, removeAllbyShop },
 } = require("../controllers");
+
+const cloudOptions = {
+  fieldname: "image",
+  destFolder: "Delivery/dishes",
+  transformation: {
+    width: 700,
+    height: 700,
+    crop: "fill",
+    gravity: "auto",
+    zoom: 0.75,
+  },
+};
 
 // створення роутера
 const dishRouter = express.Router();
 
 // ✅ Додавання страви
-dishRouter.post("/dish", authenticate, asyncHandler(addDish));
+dishRouter.post(
+  "/dish",
+  authenticate,
+  uploadCloud(cloudOptions),
+  validateBody(schemas.dishJoiSchema),
+  asyncHandler(addDish)
+);
 
 // ❌ Видалення страви by id
 dishRouter.delete(

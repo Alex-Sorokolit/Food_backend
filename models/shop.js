@@ -21,7 +21,7 @@ const shopJoiSchema = Joi.object({
   }),
 }).options({ abortEarly: false, stripUnknown: true });
 
-const Shop = model("Shop", shopSchema);
+const Shop = model("shop", shopSchema); //перший аргумент це назва колекції в однині, другий аргумент це схема
 
 const schemas = {
   shopJoiSchema,

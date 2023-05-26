@@ -4,6 +4,7 @@ class DishController {
   // ✅ Додавання страви
   async addDish(req, res) {
     const { shop, title, description } = req.body;
+    console.log(shop, title, description);
 
     if (!shop || !title || !description) {
       res.status(400);
@@ -13,8 +14,19 @@ class DishController {
     // дістаємо id із об'єкта запиту і перейменовуємо в owner
     const { _id: owner } = req.user;
 
+    // Перевіряємо чи є зображення
+    if (!req.file) {
+      res.status(400);
+      throw new Error("Controller: Image require");
+    }
+    const { path: filePath } = req.file;
+
+    const fileName = req.file.filename;
+
     const result = await Dish.create({
       ...req.body,
+      thumb: filePath,
+      imageId: fileName,
       owner,
     });
 

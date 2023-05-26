@@ -3,7 +3,8 @@ const cors = require("cors");
 const connectDb = require("./config/db");
 const logger = require("morgan");
 const { authRouter, shopRouter, dishRouter } = require("./routes");
-
+// var multer = require("multer");
+// var upload = multer();
 require("colors");
 require("dotenv").config();
 
@@ -12,7 +13,11 @@ const app = express();
 
 // middelwares ______________________________
 app.use(logger("dev"));
+// for parsing application/xwww-form-urlencoded
 app.use(express.urlencoded({ extended: false }));
+// for parsing multipart/form-data
+// app.use(upload.array());
+// for parsing application/json
 app.use(express.json());
 
 // Дозволяємо крос баузерні запити

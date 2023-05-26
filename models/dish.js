@@ -4,7 +4,7 @@ const Joi = require("joi");
 // mongoos схема перевіряє дані які зберігаються в базу даних
 const dishSchema = Schema(
   {
-    category: { type: Schema.Types.ObjectId, ref: "category", required: true }, // тут буде зберігатися id категорії, ref це колекція
+    shop: { type: Schema.Types.ObjectId, ref: "shop", required: true }, // тут буде зберігатися id магазину, ref це колекція
 
     title: {
       type: String,
@@ -16,7 +16,15 @@ const dishSchema = Schema(
       require: [true, "DB: description is required"],
     },
 
-    owner: { type: Schema.Types.ObjectId, ref: "user", required: true }, // тут буде зберігатися id користувача який додав контакт у базу, ref це колекція
+    thumb: {
+      type: String,
+    },
+
+    imageId: {
+      type: String,
+    },
+
+    owner: { type: Schema.Types.ObjectId, ref: "user", required: true }, // тут буде зберігатися id користувача який додав рецепт у базу, ref це колекція
   },
   { versionKey: false, timestamps: true }
 );
@@ -33,7 +41,7 @@ const dishJoiSchema = Joi.object({
   }),
 }).options({ abortEarly: false, stripUnknown: true });
 
-const Dish = model("Dish", dishSchema);
+const Dish = model("dish", dishSchema); //перший аргумент це назва колекції в однині, другий аргумент це схема
 
 const schemas = {
   dishJoiSchema,

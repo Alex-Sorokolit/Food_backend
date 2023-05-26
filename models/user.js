@@ -28,24 +28,10 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      // required: true,
     },
     imageId: {
       type: String,
-      // required: true,
     },
-    // subscription: {
-    //   email: {
-    //     type: String,
-    //     match: emailRegexp,
-    //     unique: true,
-    //     default: "",
-    //   },
-    //   isSubscribe: {
-    //     type: Boolean,
-    //     default: false,
-    //   },
-    // },
   },
   { versionKey: false, timestamps: true }
 );
@@ -92,25 +78,12 @@ const updateUserSchema = Joi.object({
   password: Joi.string().min(6),
 });
 
-// const subscriptionSchema = Joi.object({
-//   email: Joi.string()
-//     .pattern(emailRegexp)
-//     .email({
-//       minDomainSegments: 1,
-//       tlds: { allow: ["com", "net", "ua"] },
-//     })
-//     .messages({
-//       "string.pattern.base": `"email" should be example@mail.com`,
-//     }),
-// });
-
 const schemas = {
   registerSchema,
   loginSchema,
   updateUserSchema,
-  // subscriptionSchema,
 };
 
-const User = model("user", userSchema);
+const User = model("user", userSchema); //перший аргумент це назва колекції в однині, другий аргумент це схема
 
 module.exports = { User, schemas };
