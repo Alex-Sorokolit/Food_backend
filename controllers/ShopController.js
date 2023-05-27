@@ -60,7 +60,7 @@ class ShopController {
   }
 
   // ⏹️ Отримати список всіх магазинів
-  async getAllShops(req, res) {
+  async getAllUserShops(req, res) {
     const { _id: userId } = req.user;
 
     const result = await Shop.find({ owner: userId });
@@ -75,6 +75,25 @@ class ShopController {
       status: "success",
       code: 200,
       message: "Own Shops",
+      data: result,
+      quantity: result.length,
+    });
+  }
+
+  // ⏹️ Отримати список всіх магазинів
+  async getAllShops(req, res) {
+    const result = await Shop.find();
+
+    // Перевірка чи знайдено документи в базі даних
+    if (!result) {
+      res.status(400);
+      throw new Error("Controller: Shops not found");
+    }
+
+    res.json({
+      status: "success",
+      code: 200,
+      message: "All Shops",
       data: result,
       quantity: result.length,
     });
